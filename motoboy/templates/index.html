@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="m-auto container row conteudo">
+    <div class="col-12 col-md-3 bg-dark">
+        <form class="form p-3" method="post" action="{% url 'index' %}" autocomplete="off">
+        	{% csrf_token %}
+            <div class="form-group">
+                <label>Data</label>
+                <input class="col-12" type="date" id="data" name="data" required="">
+            </div>
+            <div class="form-group">
+                <label>Cliente</label>
+                <input class="col-12" id="cliente" name="cliente" required="">
+            </div>
+            <div class="form-group">
+                <label>Endereço</label>
+                <input class="col-12" id="endereco" name="endereco" required="">
+            </div>
+            <div class="form-group">
+                <label>Valor</label>
+                <input class="col-12" type="number" step="any" id="valor" name="valor" required="">
+            </div>
+        	<button type="submit" class="btn btn-primary w-100">Confimar</button>
+        </form>
+        
+		<div class="card">
+        	<div class="card-body">
+        		<h5><b>VENDAS</b></h5>
+        		<ul class="nav">
+            		<li>Realizadas: <span class="">{{ qtde_entregas }}</span></li>
+            		<li>Recebidas: <span class="">{{ entregas_recebidas }}</span></li>
+            		<li>Pendentes: <span class="">{{ entregas_pendentes}}</span></li>
+            	</ul>
+        	</div>
+        </div>
+    </div>
+    
+    <div class="col-12 col-md-9">
+        <table class="table light-table table-striped" id="geral">
+        	<thead class="bg-dark">
+        		<tr><th colspan="5" class="bg-danger">RECEBIMENTOS PENDENTES</th></tr>
+        		<th>DATA</th><th>CLIENTE</th><th>ENDEREÇO</th><th>VALOR</th><th>RECEBER</th>
+        	</thead>
+        	<tbody>
+        		{% for e in entregas %}
+        			<tr>
+        				<td>{{ e.data }}</td>
+        				<td>{{ e.cliente }}</td>
+        				<td>{{ e.endereco }}</td>
+        				<td class="valorVenda">{{ e.valor }}</td>
+        				
+        				<td>
+        					<a href="{% url 'recebimentos' e.pk %}">
+        						<button class="btn btn-danger">
+        							<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+        						</button>
+    						</a>
+    					</td>
+    					
+        			</tr>
+        		{% endfor %}
+        	</tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+	let valores = document.querySelectorAll(".valorVenda");
+    for (let i = 0; i < valores.length; i++) {
+        valores[i].innerHTML = Number(valores[i].innerHTML).toFixed(2);
+    }
+</script>
+
+{% endblock %}

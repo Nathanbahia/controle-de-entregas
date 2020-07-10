@@ -1,0 +1,33 @@
+{% load static%}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Controle de Entregas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Galada&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+</head>
+<body>
+    <div class="cabecalho row shadow">
+        <div class="col-12 col-md-1">
+            <img src="{% static 'images/motoboy.png' %}" width="100">
+        </div>
+        <div class="col-12 col-md-11">
+            <h1 class="">Controle de Entregas</h1>
+        </div>
+    </div>
+    
+    {% block content %}
+    
+    
+    {% endblock %}
+    
+    <footer class="footer bg-dark">
+        <p>Desenvolvido por <b>Nathan Bahia</b></p>
+    </footer>
+</body>
+</html>

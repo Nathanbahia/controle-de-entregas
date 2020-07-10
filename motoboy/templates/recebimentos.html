@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Recebimentos</h1>
+    <table class="table w-50" id="recebimento">
+        <tr><td class="bg-danger">Data</td><td>{{ entrega.data }}</td></tr>
+        <tr><td class="bg-danger">Cliente</td><td>{{ entrega.cliente }}</td></tr>
+        <tr><td class="bg-danger">Endereço</td><td>{{ entrega.endereco }}</td></tr>
+        <tr><td class="bg-danger">Valor</td><td>{{ entrega.valor }}</td></tr>
+    </table>
+    
+    <form class="form" method="post" action="{% url 'baixa' entrega.id %}">
+    	{% csrf_token %}
+    	<button class="btn btn-warning"><a href="{% url 'index' %}">Cancelar</a></button>
+    	<button type="submit" class="btn btn-primary">Confirmar recebimento</button>
+    </form>
+</div>
+
+{% endblock %}
